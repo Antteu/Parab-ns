@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balões Subindo</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #87CEEB; /* Cor do céu */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            position: relative;
+        }
+        .balloon {
+            position: absolute;
+            bottom: -100px; /* Inicia fora da tela */
+            width: 100px; /* Largura do balão */
+            transition: transform 10s linear; /* Animação suave */
+        }
+        .message {
+            position: absolute;
+            font-size: 4em; /* Tamanho grande do texto */
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="message">Parabéns Joaquim</div>
+    <script>
+        // Função para criar e animar um balão
+        function createBalloon() {
+            const balloon = document.createElement('img');
+            balloon.src = 'balão.png'; // Caminho para sua imagem de balão
+            balloon.classList.add('balloon');
+            
+            // Posiciona o balão em uma posição horizontal aleatória
+            balloon.style.left = Math.random() * window.innerWidth + 'px';
+            
+            document.body.appendChild(balloon);
+
+            // Animação para fazer o balão subir
+            setTimeout(() => {
+                balloon.style.transform = 'translateY(-100vh)';
+            }, 100);
+
+            // Remove o balão após a animação terminar
+            balloon.addEventListener('transitionend', () => {
+                balloon.remove();
+            });
+        }
+
+        // Cria balões em intervalos regulares
+        setInterval(createBalloon, 2000); // Novo balão a cada 2 segundos
+    </script>
+</body>
+</html>
